@@ -67,7 +67,7 @@ export function mergedQuantity(name: string, sources: Pick<ShoppingItemSource, "
   if (!qs.length) return null;
   const noun = findIngredient(name)?.countNoun;
   return sumQuantities(qs)
-    .map((q) => (q.unit || !noun ? formatQuantity(q) : formatQuantity(q, noun)))
+    .map((q) => (q.unit || !noun || q.amount <= 1 ? formatQuantity(q) : formatQuantity(q, noun)))
     .join(" + ");
 }
 

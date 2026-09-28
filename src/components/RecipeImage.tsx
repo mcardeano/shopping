@@ -134,7 +134,7 @@ export function GeneratedCover({ id, cuisine, ingredients = [], className }: { i
       }
     }
   });
-  const filterId = `grain-${id.slice(0, 8)}`;
+  const filterId = `grain-${Math.floor(rng(id + "#id")() * 1e9).toString(36)}`;
   return (
     <svg viewBox={`0 0 ${W} ${H}`} preserveAspectRatio="xMidYMid slice" className={className} role="img" aria-hidden="true">
       <defs>

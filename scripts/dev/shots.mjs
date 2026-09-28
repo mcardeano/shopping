@@ -1,7 +1,9 @@
 import { chromium } from "playwright";
-const S = process.env.S;
+const S = process.env.S ?? "./.data/screenshots";
+import fs from "node:fs";
+fs.mkdirSync(S, { recursive: true });
 const pages = (process.argv[2] ?? "/,/saved,/cook,/plan,/shopping,/profile").split(",");
-const browser = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium" });
+const browser = await chromium.launch({ executablePath: process.env.CHROMIUM_PATH || undefined });
 const ctx = await browser.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2 });
 const page = await ctx.newPage();
 page.on("pageerror", (e) => console.log("PAGEERROR", e.message));

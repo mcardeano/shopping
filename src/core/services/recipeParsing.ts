@@ -133,7 +133,8 @@ export function parseRecipeText(input: string): Partial<RecipeDraft> & { title?:
       if (!sawSections && looksLikeIngredient(line)) {
         mode = "ingredients";
       } else {
-        description.push(line);
+        // "Serves 2 · 25 mins" is metadata, not a description.
+        if (!/^(serves|servings?|makes|feeds|ready in|prep|cook|total|\d+\s*(min|mins|minutes))\b/i.test(line)) description.push(line);
         continue;
       }
     }

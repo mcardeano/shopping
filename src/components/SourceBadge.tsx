@@ -14,7 +14,8 @@ const DOT: Record<string, string> = {
 export function SourceBadge({ platform, creator, url, compact }: { platform: string | null; creator?: string | null; url?: string | null; compact?: boolean }) {
   if (!platform) return null;
   const label = PLATFORM_LABEL[platform] ?? platform;
-  const text = compact ? label : `${platform === "manual" ? label : `Saved from ${label}`}${creator ? ` · ${creator}` : ""}`;
+  const lead = platform === "manual" ? label : platform === "text" ? "Pasted text" : platform === "image" ? "From a screenshot" : `Saved from ${label}`;
+  const text = compact ? label : `${lead}${creator ? ` · ${creator}` : ""}`;
   const content = (
     <span className="inline-flex items-center gap-1.5 text-[12.5px] text-muted">
       <span className={`h-2 w-2 rounded-full ${DOT[platform] ?? "bg-muted"}`} />
